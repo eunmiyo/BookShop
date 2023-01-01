@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<%@ include file="top.jsp"%>
+		<form name = "frm" method="post" action="add">
+			<table>
+				<caption>상 품 등 록</caption>
+				<div>		
+				<tr>
+					<th>상품명</th>
+					<td><input type="text" name="title"></td>
+				</tr>
+				<tr>
+					<th>저자명</th>
+					<td><input type="text" name="writer"></td>
+				</tr>
+				<tr>
+					<th>금 액</th>
+					<td><input type="text" name="price"></td>
+				</tr>
+				<tr>
+					<th>재고수량</th>
+					<td><input type="text" name="stock"></td>
+				</tr>
+				</div>
+			</table>
+		
+		</form>
+	<%@ include file="footer.jsp"%>
+</body>
+</html>

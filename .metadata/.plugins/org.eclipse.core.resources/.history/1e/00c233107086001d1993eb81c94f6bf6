@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+		<%@ include file="top.jsp"%>
+		<form name = "frm" method="post" action="insert">
+			<table>
+				<caption>상 품 목 록</caption>	
+				<tr>
+					<th>번 호</th>
+					<th>상품명</th>
+					<th>저자명</th>
+					<th>금 액</th>
+					<th>재고수량</th>
+					<th>수정/삭제</th>
+				</tr>
+				<c:forEach var="book" items="${bookList}" varStatus="status">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<a class="on" 
+								onclick="cheDelete(); return false;">삭 제</a>
+							<a href=">수 정</a>
+						</td>
+					</tr>
+				</c:forEach> 	
+			</table>		
+		</form>
+	<%@ include file="footer.jsp"%>
+<script type="text/javascript" src="./script.js"></script>
+</body>
+</html>

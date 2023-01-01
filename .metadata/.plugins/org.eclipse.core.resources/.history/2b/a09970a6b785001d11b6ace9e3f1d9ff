@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header>BOOK SHOP</header>
+	<nav>
+		<ul>
+			<li><a>상품등록</a></li>
+			<li><a>상품목록</a></li>
+			<li><a>상품구매</a></li>
+			<li><a>장바구니</a></li>
+		</ul>
+	</nav>
+	<section>
+		<img src="./img/도서관.png"/>
+	</section>
+</body>
+</html>

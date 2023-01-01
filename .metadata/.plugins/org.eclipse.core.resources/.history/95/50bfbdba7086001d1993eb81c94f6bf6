@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%@ include file="top.jsp"%>
+		<form name = "frm" method="post" action="insert">
+			<table>
+				<caption>상 품 수 정</caption>
+				<tr>
+					<th>상품명</th>
+					<td><input type="text" name="title"></td>
+				</tr>
+				<tr>
+					<th>저자명</th>
+					<td><input type="text" name="writer"></td>
+				</tr>
+				<tr>
+					<th>금 액</th>
+					<td><input type="text" name="price"></td>
+				</tr>
+				<tr>
+					<th>재고수량</th>
+					<td><input type="text" name="stock"></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button class="btn" type="submit"
+							onclick="fn_submit(); return false;">상품등록</button>
+						<button class="btn" type="reset">취소</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	<%@ include file="footer.jsp"%>
+<script type="text/javascript" src="./script.js"></script>
+</body>
+</html>

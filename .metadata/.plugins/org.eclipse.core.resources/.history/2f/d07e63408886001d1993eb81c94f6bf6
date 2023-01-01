@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@ page import="java.util.*" %>
+<%@ page import="DTO.Book" %>
+<% 
+request.setCharacterEncoding("UTF-8"); 
+ArrayList<Book> bookList = new ArrayList<Book>();
+bookList = (ArrayList<Book>)request.getAttribute("bookList");
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+		<%@ include file="top.jsp"%>
+			<table>
+				<caption>상 품 목 록</caption>	
+				<tr>
+					<th>번 호</th>
+					<th>상품명</th>
+					<th>저자명</th>
+					<th>금 액</th>
+					<th>재고수량</th>
+					<th>수정/삭제</th>
+				</tr>
+				<% for(Book b : bookList) { %>
+				<tr>
+					<td><%=b.getNo() %></td>
+					<td><%=b.getTitle() %></td>
+					<td><%=b.getWriter() %></td>
+					<td><%=b.getPrice() %></td>
+					<td><%=b.getStock() %></td>
+					<td>
+						<a href="modify.jsp">수정</a>
+						<a onclick="chkDelete(<%=b.getTitle() %>); return false;">삭제</a>
+					</td>
+				</tr>				
+				<% } %>	
+			</table>		
+	<%@ include file="footer.jsp"%>
+	
+<script type="text/javascript" src="./script.js"></script>
+</body>
+</html>

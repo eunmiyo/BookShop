@@ -1,0 +1,206 @@
+package DAO;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import DTO.Book;
+
+public class BookDAO {
+	Connection conn = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	
+	public static Connection getConnection() throws Exception {
+		Class.forName("oracle.jdbc.OracleDriver");
+		Connection con = DriverManager
+				.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "test", "test1234");
+		return con;
+	}
+	
+	//상품등록
+	public int insert(HttpServletRequest request, HttpServletResponse response) {
+		String title = request.getParameter("title");
+		String writer = request.getParameter("writer");
+		int price = Integer.parseInt(request.getParameter("price"));
+		int stock = Integer.parseInt(request.getParameter("stock"));
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "INSERT INTO BOOK_LIST VALUES(BOOK_SEQ.NEXTVAL, ?, ?, ?, ?)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, title);
+			ps.setString(2, writer);
+			ps.setInt(3, price);
+			ps.setInt(4, stock);
+			
+			result = ps.executeUpdate();
+			
+			conn.close();
+			ps.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();			
+		}		
+		return result;
+	}
+	
+	//상품조회
+	public String listAll(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<Book> bookList = new ArrayList<Book>();
+		
+		 try {
+			 conn = getConnection();
+			 String sql = "SELECT * FROM BOOK_LIST";
+			 
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Book book = new Book();
+				book.setNo(rs.getInt(1));
+				book.setTitle(rs.getString(2));
+				book.setWriter(rs.getString(3));
+				book.setPrice(rs.getInt(4));
+				book.setStock(rs.getInt(5));
+				
+				bookList.add(book);
+			}		
+			request.setAttribute("bookList", bookList);
+			
+			conn.close();
+			rs.close();
+			
+		 	} catch (Exception e) {
+				e.printStackTrace();
+		 	}
+		 
+		 return "list.jsp";
+	}
+	
+	//상품삭제하기
+	public int delete(HttpServletRequest request, HttpServletResponse response) {
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			int no = Integer.parseInt(request.getParameter("no"));
+			String sql = "DELETE FROM BOOK_LIST WHERE BOOK_NO = " + no;
+			
+			ps = conn.prepareStatement(sql);
+			result = ps.executeUpdate(); //쿼리문 실행	
+			
+			conn.close();
+			ps.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	//상품수정 전 화면 보여주기
+	public String modify(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			conn = getConnection();
+			int no = Integer.parseInt(request.getParameter("no"));
+			
+			String sql = "SELECT TITLE, WRITER, PRICE, STOCK FROM BOOK_LIST WHERE BOOK_NO = " + no;
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			Book book = new Book();
+			
+			if(rs.next()) {
+				book.setTitle(rs.getString(1));
+				book.setWriter(rs.getString(2));
+				book.setPrice(rs.getInt(3));
+				book.setStock(rs.getInt(4));
+			}
+			
+			request.setAttribute("book", book);
+			
+			conn.close();
+			ps.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "modify.jsp";
+	}
+	
+	//상품수정
+	public int update(HttpServletRequest request, HttpServletResponse response) {
+		String title = request.getParameter("title");
+		String writer = request.getParameter("writer");
+		int price = Integer.parseInt(request.getParameter("price"));
+		int stock = Integer.parseInt(request.getParameter("stock"));
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			
+			String sql = "UPDATE BOOK_LIST SET WRITER = ?, "
+					+ "PRICE = ?, STOCK = ? "
+					+ "WHERE TITLE = ? ";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,writer);
+			ps.setInt(2, price);
+			ps.setInt(3, stock);
+			ps.setString(4, title);
+			
+			result = ps.executeUpdate();
+			
+			conn.close();
+			ps.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	//구매 리스트
+	public String buy(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<Book> bookList = new ArrayList<Book>();
+		
+		 try {
+			 conn = getConnection();
+			 String sql = "TITLE||' /'||WRITER||' /'||PRICE as buyList FROM BOOK_LIST";
+			 
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Book book = new Book();
+				book.setTitle(rs.getString(1));
+				book.setWriter(rs.getString(2));
+				book.setPrice(rs.getInt(3));
+
+				bookList.add(book);
+			}		
+			request.setAttribute("bookList", bookList);
+			System.out.println(bookList);
+			
+			conn.close();
+			rs.close();
+			
+		 	} catch (Exception e) {
+				e.printStackTrace();
+		 	}
+		 
+		 return "buy.jsp";
+	}
+}

@@ -1,0 +1,41 @@
+function fn_submit() {
+	var f = document.frm;
+	
+	if(f.title.value == "") {
+		alert("상품명이 입력되지 않았습니다!")
+		f.title.focus();
+		return false;
+	}
+	
+	if(f.writer.value == "") {
+		alert("저자명이 입력되지 않았습니다!")
+		f.writer.focus();
+		return false;
+	}
+	
+	if(f.price.value == "") {
+		alert("금액이 입력되지 않았습니다!")
+		f.price.focus();
+		return false;
+	}
+	
+	if(f.stock.value == "") {
+		alert("재고수량이 입력되지 않았습니다!")
+		f.stock.focus();
+		return false;
+	}
+	
+	f.submit();
+}
+
+function chkDelete(title) {
+	const result = confirm("삭제하시겠습니까?");
+	
+	if(result){
+			const url = location.origin; //'http://localhost:8090'
+			location.href = url + "/book/delete?title=" + title; //페이지이동
+			
+		} else {
+			return false;
+		}
+}
