@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
-	<footer>SHOPPING MALL</footer>
+<body>	
+	<div class="fixed-footer">
+        <div>SHOPPING MALL</div> 
+    </div>
 </body>
 </html>

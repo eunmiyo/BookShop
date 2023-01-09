@@ -14,6 +14,7 @@
 <body>
 	<%@ include file="top.jsp"%>
 		
+		<div class="container">
 			<table class="booklist">
 				<caption>도 서 목 록</caption>
 				<tr class="bar">
@@ -23,6 +24,7 @@
 					<th>금 액</th>
 					<th>재고수량</th>
 					<th>수정/삭제</th>
+					<th></th>
 				</tr>		
 				<c:forEach var="book" items="${bookList}" varStatus="status">
 				<tr>
@@ -35,10 +37,14 @@
 						<a href="modify?no=${book.no }">수정/</a>
 						<a onclick="chkDelete(${book.no }); return false;">삭제</a>
 					</td>
+					<td class="list">
+						<!-- likebtn(this) : this = 자기 자신(태그)객체를 매개변수로 사용 -->
+						<img class="like" onclick="likebtn(this)" src="./img/heart.png"/>
+					</td>			
 				</tr>								
 				</c:forEach>
 			</table>
-	
+		</div>
 	<%@ include file="footer.jsp"%>
 	
 <script type="text/javascript" src="./script.js"></script>

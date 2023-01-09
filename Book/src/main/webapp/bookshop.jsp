@@ -11,8 +11,8 @@
 <body>
 	<%@ include file="top.jsp"%>
 	
-		<img src="./img/도서관.png"/>
-	
+	<img src="./img/도서관.png"/>
+
 	<%@ include file="footer.jsp"%>
 </body>
 </html>

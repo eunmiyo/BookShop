@@ -1,3 +1,5 @@
+var rootPath = "/Book";
+
 //장바구니 객체
 var Cart = function () {
 	this.no = 0; //책 번호
@@ -125,6 +127,7 @@ function init_buy() {
 	bookdisplay();
 }
 
+//장바구니
 function order() {
 	try {
 		buy_index_list = []; //구매인덱스리스트 초기화
@@ -181,4 +184,19 @@ function cartdel() {
 	
 	buy_index_list = []; //구매인덱스리스트 초기화
 	bookdisplay();
+}
+
+/**
+ * 도서목록 좋아요 표시
+ */
+function likebtn(imgObj) {
+/*	if (imgObj.src.indexOf("/redheart.png") > -1) {
+		imgObj.src = rootPath + "/img/heart.png";
+	} else {
+		imgObj.src = rootPath + "/img/redheart.png";
+	}*/
+	
+	//A.indexOf(B) : A 문자열에서 B 문자열이 시작하는 인덱스 번호를 반환. A 문자열에 B 문자열이 없다면 -1 반환
+	//인덱스는 0부터 시작
+	imgObj.src = (imgObj.src.indexOf("/redheart.png") > -1) ? rootPath + "/img/heart.png" : rootPath + "/img/redheart.png";
 }

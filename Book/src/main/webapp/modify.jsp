@@ -13,36 +13,37 @@
 </head>
 <body>
 	<%@ include file="top.jsp"%>
-	<section>
-		<form name = "frm" method="post" action="update">
-			<table>
-				<caption>도 서 수 정</caption>
-				<tr>
-					<th>도서명</th>
-					<td><input type="text" name="title" value="${book.title }"></td>
-				</tr>
-				<tr>
-					<th>저자명</th>
-					<td><input type="text" name="writer" value="${book.writer }"></td>
-				</tr>
-				<tr>
-					<th>금 액</th>
-					<td><input type="text" name="price" value="${book.price }"></td>
-				</tr>
-				<tr>
-					<th>재고수량</th>
-					<td><input type="text" name="stock" value="${book.stock }"></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<button class="btn" type="submit"
-							onclick="fn_submit(); return false;">도서등록</button>
-						<button class="btn" type="button" onclick="location='list'">도서목록</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</section>
+	
+	<div class="container">
+			<form name = "frm" method="post" action="update">
+				<table>
+					<caption>도 서 수 정</caption>
+					<tr>
+						<th>도서명</th>
+						<td><input type="text" name="title" value="${book.title }"></td>
+					</tr>
+					<tr>
+						<th>저자명</th>
+						<td><input type="text" name="writer" value="${book.writer }"></td>
+					</tr>
+					<tr>
+						<th>금 액</th>
+						<td><input type="text" name="price" value="${book.price }"></td>
+					</tr>
+					<tr>
+						<th>재고수량</th>
+						<td><input type="text" name="stock" value="${book.stock }"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button class="btn" type="submit"
+								onclick="fn_submit(); return false;">도서등록</button>
+							<button class="btn" type="button" onclick="location='list'">도서목록</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+	</div>
 		
 	<%@ include file="footer.jsp"%>
 <script type="text/javascript" src="./script.js"></script>

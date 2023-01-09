@@ -15,6 +15,7 @@
 <body onload="init_buy();">
 	<%@ include file="top.jsp"%>
 	
+	<div class="container">
 		<table class="wap">
 			<caption>도 서 주 문</caption>
 			<tr class="bar">
@@ -36,7 +37,8 @@
 			
 			</table>
 		</table>
-		
+	</div>
+	
 	<%@ include file="footer.jsp"%>
 	<script type="text/javascript" src="./jquery-3.6.3.js"></script>
 	<script type="text/javascript" src="./script.js"></script>
